@@ -4,18 +4,16 @@ using System.Collections;
 
 public class HitAttempt : MonoBehaviour {
 
-	public UnityEvent Collision;
-	public PlayerControl Player;
-	public GameObject Target;
+	public string Player;
+	public string Target;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
 	void OnCollisionEnter2D(Collision2D other){
-		if (Collision != null) {
-			if(other.gameObject == Target && Player.onHit)	Collision.Invoke ();
+		if(other.gameObject != null){
+			if(other.gameObject.name == Target + "Head"){
+				if(GameObject.Find(Player).GetComponent<PlayerControl>().onHit){
+					GameObject.Find(Target).GetComponent<PlayerControl>().Death();
+				}	
+			}
 		}
 	}
 }

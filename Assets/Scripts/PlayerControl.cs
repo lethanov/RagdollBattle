@@ -9,7 +9,7 @@ public class PlayerControl : MonoBehaviour {
 	public float MovementSpeed;
 	public float CooldownShoot;
 
-	private float timerShoot;
+	public float timerShoot;
 
 	private Rigidbody2D RigidBody;
 
@@ -21,7 +21,7 @@ public class PlayerControl : MonoBehaviour {
 
 	private bool alive;
 
-	[HideInInspector] public bool onHit;
+	public bool onHit;
 	
 	void Start () {
 		alive = true;
@@ -30,11 +30,7 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		OnHitManage();
-	}
-
-	void OnHitManage(){
-		if (timerShoot < 0.1f) {
+		if (timerShoot < 0.2f) {
 			onHit = true;
 		} else {
 			onHit = false;
@@ -46,9 +42,7 @@ public class PlayerControl : MonoBehaviour {
 			Control();
 			
 			RigidBody.velocity = new Vector3 (LC_XVelocity * MovementSpeed, LC_YVelocity * MovementSpeed, 0);
-			
 
-			
 			//Uppercut
 			if (RC_YVelocity < 0) {
 				if (timerShoot > CooldownShoot) {
